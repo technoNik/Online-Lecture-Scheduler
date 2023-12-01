@@ -6,13 +6,25 @@ const dbConnect = () => {
         useNewUrlParser : true,
         useUnifiedTopology : true
     })
-    .then(() => console.log("Database Connected Successfully."))
-    .catch((error) => {
-        console.log("Database connection error")
+
+    const db = mongoose.connection;
+    db.on("error", (error) => {
+        console.error("MongoDB connection error:");
         console.error(error);
-        console.log(error);
         process.exit(1);
-    })
+      });
+    
+      db.once("open", () => {
+        console.log("Database Connected Successfully.");
+      });
+
+    // .then(() => console.log("Database Connected Successfully."))
+    // .catch((error) => {
+    //     console.log("Database connection error")
+    //     console.error(error);
+    //     console.log(error);
+    //     process.exit(1);
+    // })
 };
 
 module.exports = dbConnect;
