@@ -20,13 +20,14 @@ dbConnect();
 // Cloudinary connection
 const cloudinaryConnect = require("./config/cloudinary");
 cloudinaryConnect();
-// mongoose.connect('mongodb://localhost:27017/lecture-scheduling', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
 
-// const db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+mongoose.connect('mongodb://localhost:27017/lecture-scheduling', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 const instructorRoutes = require('./routes/instructor');
 const courseRoutes = require('./routes/course');
